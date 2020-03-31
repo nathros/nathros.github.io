@@ -1,7 +1,42 @@
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style type=text/css>
-	body{margin: 0;overflow:hidden;}
-</style>
-<iframe src="https://q6hkaaeqd1.execute-api.eu-west-1.amazonaws.com/stage/" style="border: 0; width: 100%; height: 100%" frameBorder="0">
-	Browser not compatible.
-</iframe>
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>title</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style>
+			html {
+				height: 100%;
+			}
+			body {
+				margin: 0;
+				overflow: hidden;
+				height: 100%;
+			}
+			#frame {
+				border: 0;
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<iframe id="frame"></iframe>
+		<script>
+			var frame = document.getElementById('frame');
+			var url = "https://q6hkaaeqd1.execute-api.eu-west-1.amazonaws.com/stage/";
+			var urlParams = new URLSearchParams(window.location.search);
+			var page = urlParams.get('pg');
+			
+			if (page == "cv") {
+				url += "cv";
+			} else if (page == "rohloff") {
+				url += "projects/rohloff"
+			} else if (page == "server45") {
+				url += "projects/fileserver"
+			} else if (page == "monster01") {
+				url += "projects/monsteritx"
+			}
+			frame.setAttribute("src", url);
+		</script>
+	</body>
+</html>
