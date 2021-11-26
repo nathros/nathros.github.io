@@ -33,6 +33,10 @@
 			var url = "https://q6hkaaeqd1.execute-api.eu-west-1.amazonaws.com/stage/";
 			var urlParams = new URLSearchParams(window.location.search);
 			var page = urlParams.get('pg');
+
+			window.addEventListener("message", function (e) {
+				document.cookie = "frame=" + e.data;
+			}, false);
 			
 			if (page == "cv") {
 				url += "cv";
@@ -44,6 +48,15 @@
 				url += "projects/monsteritx"
 			} else if (page == "3d-quote") {
 				url += "3d-quote"
+			} else {
+				if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+					let split = document.cookie.split("=");
+					if (split.length != 1) {
+						if (split[1].length > 8) {
+							url += split[1].substring(7);
+						}
+					}
+				}
 			}
 			frame.setAttribute("src", url);
 		</script>
