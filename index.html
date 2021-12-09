@@ -33,7 +33,7 @@
 			var url = "https://q6hkaaeqd1.execute-api.eu-west-1.amazonaws.com";
 
 			window.addEventListener("message", function (e) {
-				location.replace("#" + e.data); 
+				history.replaceState(null, "", "#" + e.data);
 			}, false);
 
 			if (window.location.hash) {
