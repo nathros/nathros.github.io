@@ -30,33 +30,16 @@
 		<iframe id="frame"></iframe>
 		<script>
 			var frame = document.getElementById('frame');
-			var url = "https://q6hkaaeqd1.execute-api.eu-west-1.amazonaws.com/stage/";
-			var urlParams = new URLSearchParams(window.location.search);
-			var page = urlParams.get('pg');
+			var url = "https://q6hkaaeqd1.execute-api.eu-west-1.amazonaws.com";
 
 			window.addEventListener("message", function (e) {
-				document.cookie = "frame=" + e.data;
+				location.replace("#" + e.data); 
 			}, false);
-			
-			if (page == "cv") {
-				url += "cv";
-			} else if (page == "rohloff") {
-				url += "projects/rohloff"
-			} else if (page == "server45") {
-				url += "projects/fileserver"
-			} else if (page == "monster01") {
-				url += "projects/monsteritx"
-			} else if (page == "3d-quote") {
-				url += "3d-quote"
+
+			if (window.location.hash) {
+				url += window.location.hash.substring(1);
 			} else {
-				if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
-					let split = document.cookie.split("=");
-					if (split.length != 1) {
-						if (split[1].length > 8) {
-							url += split[1].substring(7);
-						}
-					}
-				}
+				url += "/stage/";
 			}
 			frame.setAttribute("src", url);
 		</script>
